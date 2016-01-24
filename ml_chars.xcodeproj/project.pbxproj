@@ -25,6 +25,8 @@
 /* Begin PBXFileReference section */
 		74A101D91C54A7B10030CADF /* ml_chars */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ml_chars; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A101DC1C54A7B10030CADF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		74A101E31C54A9BA0030CADF /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extensions; sourceTree = "<group>"; };
+		74A101E41C54A9BA0030CADF /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,8 @@
 		74A101DB1C54A7B10030CADF /* ml_chars */ = {
 			isa = PBXGroup;
 			children = (
+				74A101E31C54A9BA0030CADF /* Extensions */,
+				74A101E41C54A9BA0030CADF /* Model */,
 				74A101DC1C54A7B10030CADF /* main.swift */,
 			);
 			path = ml_chars;
@@ -239,6 +243,7 @@
 				74A101E21C54A7B10030CADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
