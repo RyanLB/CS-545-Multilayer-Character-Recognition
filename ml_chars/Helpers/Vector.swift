@@ -44,6 +44,11 @@ class Vector {
         }
     }
     
+    /// Applies the sigmoid function to each element of this vector, replacing its contents with the results.
+    func sigmoidTransform() {
+        _data = _data.map{ 1 / (1 + pow(M_E, -$0)) }
+    }
+    
     func add(v2: Vector, scale: Double?) throws {
         guard v2.length == length else {
             throw VectorError.MismatchedLength(expected: length, found: v2.length)

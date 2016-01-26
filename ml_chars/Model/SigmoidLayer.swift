@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum SigmoidLayerError : ErrorType {
+    case InputVectorLengthMismatch(expected: Int, found: Int)
+}
+
 class SigmoidLayer {
     let weightCount: Int
     let inputCount: Int
@@ -21,6 +25,23 @@ class SigmoidLayer {
         
         biases = Vector.randomVector(weightCount)
         weights = Matrix.randomMatrix(weightCount, columns: inputCount)
+    }
+    
+    /**
+     Calculates the output from this layer, `\sigma (WV + B)`
+     
+     - Parameter inputs: The outputs from the preceding layer.
+     
+     - Returns: The resulting vector.
+     */
+    func calculateOutput(inputs: Vector) throws -> Vector {
+        assert(inputs.length == inputCount, "Input vector has incorrect length")
+        
+        let result = try weights.vectorProduct(inputs)
+        try result.add(biases, scale: nil)
+        
+        result.sigmoidTransform()
+        return result
     }
     
     private class func sigmoid(input: Double) -> Double {
