@@ -30,9 +30,9 @@ class Matrix {
         }
     }
     
-    init(rows: UInt, cols: UInt) {
-        self.rows = Int(rows)
-        self.cols = Int(cols)
+    init(rows: Int, cols: Int) {
+        self.rows = rows
+        self.cols = cols
         
         self._dataArray = [Vector]()
         for _ in 0..<rows {
@@ -53,6 +53,19 @@ class Matrix {
         }
     }
     
+    init(rowVectors: [Vector]) throws {
+        rows = rowVectors.count
+        cols = rowVectors[0].length
+        
+        _dataArray = rowVectors
+        
+        for v in rowVectors {
+            guard v.length == cols else {
+                throw MatrixError.NonRectangularData
+            }
+        }
+    }
+    
     subscript(row: Int) -> Vector {
         get {
             return _dataArray[row]
@@ -65,7 +78,14 @@ class Matrix {
         }
     }
     
-    func vectorMultiply(v: Vector) throws -> Vector {
+    /**
+     Multiplies this Matrix by a given Vector.
+     
+     - Parameter v: The vector by which to multiply this Matrix. Not altered.
+     
+     - Returns: The resulting vector.
+     */
+    func vectorProduct(v: Vector) throws -> Vector {
         guard v.length == cols else {
             throw VectorError.MismatchedLength(expected: cols, found: v.length)
         }
@@ -73,6 +93,13 @@ class Matrix {
         return Vector(data: _dataArray.map({ (row: Vector) -> Double in cblas_ddot(Int32(rows), row.data, 1, v.data, 1) }))
     }
     
+    /**
+     Performs element-wise addition of this Matrix to another Matrix.
+     
+     This matrix's values are replaced with the results.
+     
+     - Throws: `MatrixError.MismatchedHeight` or `MatrixError.MismatchedWidth` if `m` has different dimensions.
+     */
     func matrixAdd(m: Matrix) throws {
         guard rows == m.rows else {
             throw MatrixError.MismatchedHeight(expected: rows, found: m.rows)
@@ -85,5 +112,17 @@ class Matrix {
         for vecs in zip(_dataArray, m.data) {
             try vecs.0.add(vecs.1, scale: nil)
         }
+    }
+    
+    /// Creates and returns a Matrix of small (-.25 < x < .25) random values with the given dimensions.
+    class func randomMatrix(rows: Int, columns: Int) -> Matrix {
+        assert(rows >= 0 && columns >= 0, "Dimensions cannot be negative")
+        
+        var randomData = [Vector]()
+        for _ in 0..<rows {
+            randomData.append(Vector.randomVector(columns))
+        }
+        
+        return try! Matrix(rowVectors: randomData)
     }
 }

@@ -69,4 +69,26 @@ class Vector {
         
         return newVector
     }
+    
+    class func randomVector(length: Int) -> Vector {
+        assert(length >= 0, "Length cannot be negative")
+        var randomData = [Double]()
+        for _ in 0..<length {
+            randomData.append(smallRandom())
+        }
+        
+        return Vector(data: randomData)
+    }
+    
+    ///Generates a small random number between -.25 and .25.
+    
+    private class func smallRandom() -> Double {
+        let randVal = drand48() * 0.25
+        if arc4random_uniform(2) == 0 {
+            return -randVal
+        }
+        
+        return randVal
+    }
+
 }

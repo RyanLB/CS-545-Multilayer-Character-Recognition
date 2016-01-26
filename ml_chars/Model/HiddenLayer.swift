@@ -1,5 +1,5 @@
 //
-//  OutputLayer.swift
+//  HiddenLayer.swift
 //  ml_chars
 //
 //  Created by Ryan Bernstein on 1/24/16.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class OutputLayer : SigmoidLayer {
+class HiddenLayer : SigmoidLayer {
     
 }

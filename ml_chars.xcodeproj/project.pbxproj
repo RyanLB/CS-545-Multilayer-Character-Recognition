@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		743AE8451C55A8E6007F4B0D /* OutputLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743AE8441C55A8E6007F4B0D /* OutputLayer.swift */; };
+		743AE8471C55AC37007F4B0D /* HiddenLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743AE8461C55AC37007F4B0D /* HiddenLayer.swift */; };
+		744580FE1C56D39700906A34 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744580FD1C56D39700906A34 /* Matrix.swift */; };
+		744581001C56DAA200906A34 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744580FF1C56DAA200906A34 /* Vector.swift */; };
 		74A101DD1C54A7B10030CADF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101DC1C54A7B10030CADF /* main.swift */; };
 		74A101EC1C54AA5D0030CADF /* NSArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101EB1C54AA5D0030CADF /* NSArrayExtension.swift */; };
 		74A101EE1C54AA600030CADF /* NSFileHandleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101ED1C54AA600030CADF /* NSFileHandleExtension.swift */; };
@@ -30,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		743AE8441C55A8E6007F4B0D /* OutputLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OutputLayer.swift; path = Model/OutputLayer.swift; sourceTree = "<group>"; };
+		743AE8461C55AC37007F4B0D /* HiddenLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HiddenLayer.swift; path = Model/HiddenLayer.swift; sourceTree = "<group>"; };
+		744580FD1C56D39700906A34 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = Helpers/Matrix.swift; sourceTree = "<group>"; };
+		744580FF1C56DAA200906A34 /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vector.swift; path = Helpers/Vector.swift; sourceTree = "<group>"; };
 		74A101D91C54A7B10030CADF /* ml_chars */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ml_chars; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A101DC1C54A7B10030CADF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		74A101EB1C54AA5D0030CADF /* NSArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSArrayExtension.swift; path = Extensions/NSArrayExtension.swift; sourceTree = "<group>"; };
@@ -50,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		744580FC1C56D2AB00906A34 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				744580FD1C56D39700906A34 /* Matrix.swift */,
+				744580FF1C56DAA200906A34 /* Vector.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		74A101D01C54A7B10030CADF = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +84,7 @@
 		74A101DB1C54A7B10030CADF /* ml_chars */ = {
 			isa = PBXGroup;
 			children = (
+				744580FC1C56D2AB00906A34 /* Helpers */,
 				74A101EA1C54AA540030CADF /* Extensions */,
 				74A101E51C54AA230030CADF /* Model */,
 				74A101DC1C54A7B10030CADF /* main.swift */,
@@ -83,6 +99,7 @@
 				74A101EF1C54AA8F0030CADF /* ConfusionMatrix.swift */,
 				74A101F01C54AA8F0030CADF /* Letter.swift */,
 				743AE8441C55A8E6007F4B0D /* OutputLayer.swift */,
+				743AE8461C55AC37007F4B0D /* HiddenLayer.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -155,9 +172,12 @@
 			files = (
 				74A101EE1C54AA600030CADF /* NSFileHandleExtension.swift in Sources */,
 				74A101F11C54AA8F0030CADF /* ConfusionMatrix.swift in Sources */,
+				744581001C56DAA200906A34 /* Vector.swift in Sources */,
+				744580FE1C56D39700906A34 /* Matrix.swift in Sources */,
 				74A101F61C54AB3F0030CADF /* SigmoidLayer.swift in Sources */,
 				74A101F21C54AA8F0030CADF /* Letter.swift in Sources */,
 				743AE8451C55A8E6007F4B0D /* OutputLayer.swift in Sources */,
+				743AE8471C55AC37007F4B0D /* HiddenLayer.swift in Sources */,
 				74A101EC1C54AA5D0030CADF /* NSArrayExtension.swift in Sources */,
 				74A101DD1C54A7B10030CADF /* main.swift in Sources */,
 			);
