@@ -9,5 +9,7 @@
 import Foundation
 
 class OutputLayer : SigmoidLayer {
-    
+    func calculateErrors(outputs: Vector, targets: Vector) -> Vector {
+        return Vector(data: zip(outputs.data, targets.data).map{ $0.0 * (1 - $0.0) * ($0.1 - $0.0) })
+    }
 }

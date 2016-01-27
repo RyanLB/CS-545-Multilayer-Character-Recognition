@@ -44,6 +44,13 @@ class SigmoidLayer {
         return result
     }
     
+    func weightedErrors(errors: Vector) throws -> (weightErrors: Vector, biasErrors: Vector) {
+        let weightErrors = try weights.transpose().vectorProduct(errors)
+        let biasErrors = try Vector.hadamardProduct(biases, v2: errors)
+        
+        return (weightErrors: weightErrors, biasErrors: biasErrors)
+    }
+    
     private class func sigmoid(input: Double) -> Double {
         return 1.0 / (1.0 + pow(M_E, -input))
     }

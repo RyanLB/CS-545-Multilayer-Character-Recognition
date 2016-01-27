@@ -114,6 +114,17 @@ class Matrix {
         }
     }
     
+    /// Returns a new Matrix representing the transpose of this one.
+    func transpose() -> Matrix {
+        var newData = [[Double]]()
+        
+        for i in 0..<cols {
+            newData.append(_dataArray.map{ $0[i] })
+        }
+        
+        return try! Matrix(data: newData)
+    }
+    
     /// Creates and returns a Matrix of small (-.25 < x < .25) random values with the given dimensions.
     class func randomMatrix(rows: Int, columns: Int) -> Matrix {
         assert(rows >= 0 && columns >= 0, "Dimensions cannot be negative")
