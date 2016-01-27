@@ -12,6 +12,26 @@ enum SigmoidLayerError : ErrorType {
     case InputVectorLengthMismatch(expected: Int, found: Int)
 }
 
+struct WeightedErrors {
+    let weightErrors: Vector
+    let biasErrors: Vector
+    
+    init(weightErrors: Vector, biasErrors: Vector) {
+        self.weightErrors = weightErrors
+        self.biasErrors = biasErrors
+    }
+}
+
+struct Deltas {
+    let weightDeltas: Matrix
+    let biasDeltas: Vector
+    
+    init(weightDeltas: Matrix, biasDeltas: Vector) {
+        self.weightDeltas = weightDeltas
+        self.biasDeltas = biasDeltas
+    }
+}
+
 class SigmoidLayer {
     let weightCount: Int
     let inputCount: Int
@@ -44,11 +64,27 @@ class SigmoidLayer {
         return result
     }
     
-    func weightedErrors(errors: Vector) throws -> (weightErrors: Vector, biasErrors: Vector) {
+    func weightedErrors(errors: Vector) throws -> WeightedErrors {
         let weightErrors = try weights.transpose().vectorProduct(errors)
         let biasErrors = try Vector.hadamardProduct(biases, v2: errors)
         
-        return (weightErrors: weightErrors, biasErrors: biasErrors)
+        return WeightedErrors(weightErrors: weightErrors, biasErrors: biasErrors)
+    }
+    
+    func train(learningRate: Double, inputs: Vector, errors: Vector, momentum: Double, previousDeltas: Deltas?) throws -> Deltas {
+        let weightDeltas = try Matrix(rowVectors: errors.data.map{ Vector.scaled(inputs, scaleFactor: learningRate * $0) })
+        
+        let biasDeltas = Vector.scaled(errors, scaleFactor: learningRate)
+        
+        if let pDelts = previousDeltas {
+            try weightDeltas.matrixAdd(Matrix.scaled(pDelts.weightDeltas, scaleFactor: momentum))
+            try biasDeltas.add(pDelts.biasDeltas, scale: momentum)
+        }
+        
+        try weights.matrixAdd(weightDeltas)
+        try biases.add(biasDeltas, scale: nil)
+        
+        return Deltas(weightDeltas: weightDeltas, biasDeltas: biasDeltas)
     }
     
     private class func sigmoid(input: Double) -> Double {

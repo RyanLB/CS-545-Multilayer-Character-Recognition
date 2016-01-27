@@ -125,6 +125,18 @@ class Matrix {
         return try! Matrix(data: newData)
     }
     
+    func scale(scaleFactor: Double) {
+        for v in _dataArray {
+            v.scale(scaleFactor)
+        }
+    }
+    
+    class func scaled(m: Matrix, scaleFactor: Double) -> Matrix {
+        let newMat = try! Matrix(data: m._dataArray.map{ $0.data })
+        newMat.scale(scaleFactor)
+        return newMat
+    }
+    
     /// Creates and returns a Matrix of small (-.25 < x < .25) random values with the given dimensions.
     class func randomMatrix(rows: Int, columns: Int) -> Matrix {
         assert(rows >= 0 && columns >= 0, "Dimensions cannot be negative")

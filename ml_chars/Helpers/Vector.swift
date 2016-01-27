@@ -56,6 +56,10 @@ class Vector {
         cblas_daxpy(Int32(length), scale != nil ? scale! : 1.0, v2.data, 1, &_data, 1)
     }
     
+    func scale(scaleFactor: Double) {
+        cblas_dscal(Int32(length), scaleFactor, &_data, 1)
+    }
+    
     class func hadamardProduct(v1: Vector, v2: Vector) throws -> Vector {
         guard v2.length == v1.length else {
             throw VectorError.MismatchedLength(expected: v1.length, found: v2.length)
@@ -83,6 +87,12 @@ class Vector {
         }
         
         return Vector(data: randomData)
+    }
+    
+    class func scaled(v: Vector, scaleFactor: Double) -> Vector {
+        let newVec = Vector(data: v.data)
+        newVec.scale(scaleFactor)
+        return newVec
     }
     
     ///Generates a small random number between -.25 and .25.

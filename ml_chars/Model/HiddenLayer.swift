@@ -9,5 +9,7 @@
 import Foundation
 
 class HiddenLayer : SigmoidLayer {
-    
+    func calculateErrors(outputs: Vector, nextLayerWeightedErrors: Vector) -> Vector {
+        return Vector(data: zip(outputs.data, nextLayerWeightedErrors.data).map{ $0.0 * (1 - $0.0) * $0.1 })
+    }
 }
