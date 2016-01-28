@@ -35,4 +35,15 @@ extension Array {
         
         return results
     }
+    
+    /// Returns the count of elements that satisfy the given predicate.
+    func countWhere(predicate: Element throws -> Bool) rethrows -> Int {
+        return try self.reduce(0, combine: {
+            if try predicate($1) {
+                return $0 + 1
+            }
+            
+            return $0
+        })
+    }
 }

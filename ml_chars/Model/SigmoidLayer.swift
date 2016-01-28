@@ -47,6 +47,11 @@ class SigmoidLayer {
         weights = Matrix.randomMatrix(weightCount, columns: inputCount)
     }
     
+    init(weights: [[Double]], biases: [Double]) {
+        self.weights = try! Matrix(data: weights)
+        self.biases = Vector(data: biases)
+    }
+    
     /**
      Calculates the output from this layer, `\sigma (WV + B)`
      
