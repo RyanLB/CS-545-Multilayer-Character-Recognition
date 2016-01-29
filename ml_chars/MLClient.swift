@@ -26,6 +26,15 @@ class MLClient {
         testData = try loadLetters(fromPath)
     }
     
+    func testWithParameters(hiddenNodes: Int, learningRate: Double, momentum: Double, epochLimit: Int) {
+        let network = NeuralNetwork(hiddenLayerWidth: hiddenNodes)
+        
+        // I'm a bad programmer who ignores exceptions
+        let history = try! network.train(trainingData, testData: testData, learningRate: learningRate, momentum: momentum, epochLimit: epochLimit)
+        
+        
+    }
+    
     /**
      Loads an array of Letter objects from a file at the given path.
      

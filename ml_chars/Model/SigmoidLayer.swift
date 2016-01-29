@@ -50,6 +50,8 @@ class SigmoidLayer {
     init(weights: [[Double]], biases: [Double]) {
         self.weights = try! Matrix(data: weights)
         self.biases = Vector(data: biases)
+        self.weightCount = weights.count
+        self.inputCount = weights[0].count
     }
     
     /**
