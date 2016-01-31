@@ -26,13 +26,21 @@ class MLClient {
         testData = try loadLetters(fromPath)
     }
     
-    func testWithParameters(hiddenNodes: Int, learningRate: Double, momentum: Double, epochLimit: Int) {
+    /**
+     Wrapper function that creates and trains a network, returning its accuracy history over the course of training.
+     
+     - Param hiddenNodes: The number of nodes in the `NeuralNetwork`'s hidden layer.
+     - Param learningRate: The learning rate with which to train the network.
+     - Param momentum: The momentum coefficient with which to train the network.
+     - Param epochLimit: The maximal number of training epochs to be used in training.
+     
+     - Returns: The `AccuracyHistory` that results from the training process.
+     */
+    func testWithParameters(hiddenNodes: Int, learningRate: Double, momentum: Double, epochLimit: Int) -> AccuracyHistory {
         let network = NeuralNetwork(hiddenLayerWidth: hiddenNodes)
         
         // I'm a bad programmer who ignores exceptions
-        let history = try! network.train(trainingData, testData: testData, learningRate: learningRate, momentum: momentum, epochLimit: epochLimit)
-        
-        
+        return try! network.train(trainingData, testData: testData, learningRate: learningRate, momentum: momentum, epochLimit: epochLimit)
     }
     
     /// Scales training data to have 0 mean and unit variance for each feature.

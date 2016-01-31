@@ -19,6 +19,7 @@
 		74A101F61C54AB3F0030CADF /* SigmoidLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101F51C54AB3F0030CADF /* SigmoidLayer.swift */; };
 		74C5265B1C59DD6A0090E50E /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5265A1C59DD6A0090E50E /* NeuralNetwork.swift */; };
 		74C5265D1C59DE8F0090E50E /* MLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5265C1C59DE8F0090E50E /* MLClient.swift */; };
+		74C5265F1C5EBEE60090E50E /* AccuracyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5265E1C5EBEE60090E50E /* AccuracyHistory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		74A101F51C54AB3F0030CADF /* SigmoidLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SigmoidLayer.swift; path = Model/SigmoidLayer.swift; sourceTree = "<group>"; };
 		74C5265A1C59DD6A0090E50E /* NeuralNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeuralNetwork.swift; path = Model/NeuralNetwork.swift; sourceTree = "<group>"; };
 		74C5265C1C59DE8F0090E50E /* MLClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLClient.swift; sourceTree = "<group>"; };
+		74C5265E1C5EBEE60090E50E /* AccuracyHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccuracyHistory.swift; path = Model/AccuracyHistory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				74A101F01C54AA8F0030CADF /* Letter.swift */,
 				743AE8441C55A8E6007F4B0D /* OutputLayer.swift */,
 				743AE8461C55AC37007F4B0D /* HiddenLayer.swift */,
+				74C5265E1C5EBEE60090E50E /* AccuracyHistory.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				74A101F61C54AB3F0030CADF /* SigmoidLayer.swift in Sources */,
 				74A101F21C54AA8F0030CADF /* Letter.swift in Sources */,
 				743AE8451C55A8E6007F4B0D /* OutputLayer.swift in Sources */,
+				74C5265F1C5EBEE60090E50E /* AccuracyHistory.swift in Sources */,
 				743AE8471C55AC37007F4B0D /* HiddenLayer.swift in Sources */,
 				74C5265B1C59DD6A0090E50E /* NeuralNetwork.swift in Sources */,
 				74A101EC1C54AA5D0030CADF /* NSArrayExtension.swift in Sources */,

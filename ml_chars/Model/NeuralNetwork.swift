@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+    
 class NeuralNetwork {
     private var _outputLayer: OutputLayer
     private var _hiddenLayer: HiddenLayer // Just one for now. May extend with a list later
@@ -60,16 +60,16 @@ class NeuralNetwork {
         return (hiddenActivations: hiddenActivations, outputActivations: outputActivations, guess: guess)
     }
     
-    func train(trainingData: [Letter], testData: [Letter], learningRate: Double, momentum: Double, epochLimit: Int) throws -> [(trainingAccuracy: Double, testAccuracy: Double)] {
-        var history = [(trainingAccuracy: Double, testAccuracy: Double)]()
+    func train(trainingData: [Letter], testData: [Letter], learningRate: Double, momentum: Double, epochLimit: Int) throws -> AccuracyHistory {
+        let history = AccuracyHistory()
         var trainingAccuracy = try accuracy(trainingData)
-        history.append((trainingAccuracy: trainingAccuracy, testAccuracy: try accuracy(testData)))
+        history.add(AccuracyHistory.AccuracyPair(trainingAccuracy: trainingAccuracy, testAccuracy: try accuracy(testData)))
         
         for _ in 0..<epochLimit {
             let newNetwork = try epochResult(trainingData, learningRate: learningRate, momentum: momentum)
             
             let newTrainingAccuracy = try newNetwork.accuracy(trainingData)
-            history.append((trainingAccuracy: newTrainingAccuracy, testAccuracy: try newNetwork.accuracy(testData)))
+            history.add(AccuracyHistory.AccuracyPair(trainingAccuracy: newTrainingAccuracy, testAccuracy: try newNetwork.accuracy(testData)))
             
             if newTrainingAccuracy <= trainingAccuracy {
                 break
