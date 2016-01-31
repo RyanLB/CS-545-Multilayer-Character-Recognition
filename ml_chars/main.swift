@@ -16,8 +16,10 @@ let client = MLClient()
 try! client.loadTrainingData(trainingDataPath)
 try! client.loadTestData(testDataPath)
 
-let stats = client.trainingDataStats()
+let stats = client.calculateStats(client.trainingData.map{ $0.attributeVector })
 print ("Means: \(stats.means)")
 print ("Standard deviations: \(stats.standardDeviations)")
+
+client.scaleTrainingData()
 
 print("ayy")

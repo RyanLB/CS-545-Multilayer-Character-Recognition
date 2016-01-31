@@ -35,24 +35,36 @@ class MLClient {
         
     }
     
-    func trainingDataStats() -> (means: [Double], standardDeviations: [Double]) {
-        let attributeCount = trainingData[0].attributeVector.count
-        
-        let means = Vector(data: [Double](count: attributeCount, repeatedValue: 0.0))
-        trainingData.forEach{
-            try! means.add(Vector(data: $0.attributeVector), scale: nil)
+    func scaleTrainingData() {
+        guard trainingData.count > 0 else {
+            return
         }
         
-        means.scale(1 / Double(trainingData.count))
+        let trainingDataStats = calculateStats(trainingData.map{ $0.attributeVector })
+        for l in trainingData {
+            let meanDiffs = zip(l.attributeVector, trainingDataStats.means).map{ $0.0 - $0.1 }
+            l.attributeVector = zip(meanDiffs, trainingDataStats.standardDeviations).map{ $0.0 / $0.1 }
+        }
+    }
+    
+    func calculateStats(dataset: [[Double]]) -> (means: [Double], standardDeviations: [Double]) {
+        let attributeCount = dataset[0].count
+        
+        let means = Vector(data: [Double](count: attributeCount, repeatedValue: 0.0))
+        dataset.forEach{
+            try! means.add(Vector(data: $0), scale: nil)
+        }
+        
+        means.scale(1 / Double(dataset.count))
         
         let sumSquaredDifferences = Vector(data: [Double](count: attributeCount, repeatedValue: 0.0))
-        for l in trainingData {
-            let diff = Vector(data: l.attributeVector)
+        for l in dataset {
+            let diff = Vector(data: l)
             try! diff.add(means, scale: -1.0)
             try! sumSquaredDifferences.add(Vector.hadamardProduct(diff, v2: diff), scale: nil)
         }
         
-        sumSquaredDifferences.scale(1.0 / Double(trainingData.count))
+        sumSquaredDifferences.scale(1.0 / Double(dataset.count))
         
         let standardDeviations = sumSquaredDifferences.data.map{ sqrt($0) }
         
