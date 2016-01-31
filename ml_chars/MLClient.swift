@@ -35,6 +35,7 @@ class MLClient {
         
     }
     
+    /// Scales training data to have 0 mean and unit variance for each feature.
     func scaleTrainingData() {
         guard trainingData.count > 0 else {
             return
@@ -47,6 +48,14 @@ class MLClient {
         }
     }
     
+    
+    /**
+     Calculates the mean and standard deviation for each column in the given two-dimensional array.
+     
+     - Param dataset: A two-dimensional array of `Double`s from which to calculate statistics.
+     
+     - Returns: A tuple with the means and standard deviations for each column as `[Double]`s.
+     */
     func calculateStats(dataset: [[Double]]) -> (means: [Double], standardDeviations: [Double]) {
         let attributeCount = dataset[0].count
         
