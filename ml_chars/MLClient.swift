@@ -35,6 +35,30 @@ class MLClient {
         
     }
     
+    func trainingDataStats() -> (means: [Double], standardDeviations: [Double]) {
+        let attributeCount = trainingData[0].attributeVector.count
+        
+        let means = Vector(data: [Double](count: attributeCount, repeatedValue: 0.0))
+        trainingData.forEach{
+            try! means.add(Vector(data: $0.attributeVector), scale: nil)
+        }
+        
+        means.scale(1 / Double(trainingData.count))
+        
+        let sumSquaredDifferences = Vector(data: [Double](count: attributeCount, repeatedValue: 0.0))
+        for l in trainingData {
+            let diff = Vector(data: l.attributeVector)
+            try! diff.add(means, scale: -1.0)
+            try! sumSquaredDifferences.add(Vector.hadamardProduct(diff, v2: diff), scale: nil)
+        }
+        
+        sumSquaredDifferences.scale(1.0 / Double(trainingData.count))
+        
+        let standardDeviations = sumSquaredDifferences.data.map{ sqrt($0) }
+        
+        return (means: means.data, standardDeviations: standardDeviations)
+    }
+    
     /**
      Loads an array of Letter objects from a file at the given path.
      

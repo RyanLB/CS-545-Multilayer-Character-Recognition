@@ -16,4 +16,8 @@ let client = MLClient()
 try! client.loadTrainingData(trainingDataPath)
 try! client.loadTestData(testDataPath)
 
+let stats = client.trainingDataStats()
+print ("Means: \(stats.means)")
+print ("Standard deviations: \(stats.standardDeviations)")
+
 print("ayy")
