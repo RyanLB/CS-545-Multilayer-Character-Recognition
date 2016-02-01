@@ -68,13 +68,15 @@ class NeuralNetwork {
         history.add(AccuracyHistory.AccuracyPair(trainingAccuracy: trainingAccuracy, testAccuracy: try accuracy(testData)))
         
         for _ in 0..<epochLimit {
-            let newNetwork = try epochResult(trainingData, learningRate: learningRate, momentum: momentum)
+            var shuffled = trainingData
+            shuffled.shuffle()
+            let newNetwork = try epochResult(shuffled, learningRate: learningRate, momentum: momentum)
             
             let newTrainingAccuracy = try newNetwork.accuracy(trainingData)
             history.add(AccuracyHistory.AccuracyPair(trainingAccuracy: newTrainingAccuracy, testAccuracy: try newNetwork.accuracy(testData)))
             
             if newTrainingAccuracy <= trainingAccuracy {
-                break
+                //break
             }
             
             trainingAccuracy = newTrainingAccuracy
@@ -131,12 +133,13 @@ class NeuralNetwork {
     private func guessFromActivations(activations: [Double]) -> Character {
         let winners = activations.indicesWhere{ $0 == activations.maxElement() }
         let winnerIndex = Int(arc4random_uniform(UInt32(winners.count)))
-        return NeuralNetwork.characterFromAZIndex(winners[winnerIndex])
+        let guess = NeuralNetwork.characterFromAZIndex(winners[winnerIndex])
+        return guess
     }
     
     private class func characterFromAZIndex(index: Int) -> Character {
         assert(index >= 0 && index <= 26, "Index must be between 0 and 26")
-        return Character(UnicodeScalar(index))
+        return Character(UnicodeScalar(index + 65))
     }
     
     private class func AZIndexFromCharacter(c: Character) -> Int {

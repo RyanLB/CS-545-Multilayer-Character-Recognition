@@ -25,6 +25,7 @@ class AccuracyHistory {
     }
     
     func writeToCSV(filename: String) {
+        NSFileManager.defaultManager().createFileAtPath(filename, contents: nil, attributes: nil)
         let fh = NSFileHandle(forWritingAtPath: filename)
         
         // This would probably be better done with a guard statement, but I am too lazy to write an error type
@@ -32,7 +33,7 @@ class AccuracyHistory {
         let handle = fh!
         
         for p in history {
-            handle.writeData("\(p.trainingAccuracy),\(p.testAccuracy)".dataUsingEncoding(NSUTF8StringEncoding)!)
+            handle.writeData("\(p.trainingAccuracy),\(p.testAccuracy)\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         }
         
         handle.closeFile()

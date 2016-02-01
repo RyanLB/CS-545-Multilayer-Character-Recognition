@@ -19,6 +19,6 @@ try! client.loadTrainingData(trainingDataPath)
 try! client.loadTestData(testDataPath)
 client.scaleTrainingData()
 
-client.testWithParameters(4, learningRate: 0.3, momentum: 0.3, epochLimit: 100).writeToCSV("\(outputDirectory)/exp1.csv")
+client.testWithParameters(4, learningRate: 0.3, momentum: 0.3, epochLimit: 50).writeToCSV("\(outputDirectory)/exp1.csv")
 
 print("ayy")
