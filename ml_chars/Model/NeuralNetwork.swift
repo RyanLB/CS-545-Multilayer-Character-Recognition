@@ -40,7 +40,9 @@ class NeuralNetwork {
        but are unlikely.
      */
     func test(l: Letter) throws -> Character {
-        let result = try outputLayer.calculateOutput(hiddenLayer.calculateOutput(Vector(data: l.attributeVector))).data
+        //let result = try outputLayer.calculateOutput(hiddenLayer.calculateOutput(Vector(data: l.attributeVector))).data
+        let hiddenOutput = try hiddenLayer.calculateOutput(Vector(data: l.attributeVector))
+        let result = try outputLayer.calculateOutput(hiddenOutput).data
         return guessFromActivations(result)
     }
     

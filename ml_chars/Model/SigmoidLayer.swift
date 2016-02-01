@@ -68,6 +68,7 @@ class SigmoidLayer {
         try result.add(biases, scale: nil)
         
         result.sigmoidTransform()
+        
         return result
     }
     
@@ -95,6 +96,7 @@ class SigmoidLayer {
     }
     
     private class func sigmoid(input: Double) -> Double {
-        return 1.0 / (1.0 + pow(M_E, -input))
+        let res = 1.0 / (1.0 + pow(M_E, -input))
+        return res
     }
 }

@@ -90,7 +90,7 @@ class Matrix {
             throw VectorError.MismatchedLength(expected: cols, found: v.length)
         }
         
-        return Vector(data: _dataArray.map({ (row: Vector) -> Double in cblas_ddot(Int32(rows), row.data, 1, v.data, 1) }))
+        return Vector(data: _dataArray.map{ try! $0.dot(v) })
     }
     
     /**

@@ -60,6 +60,14 @@ class Vector {
         cblas_dscal(Int32(length), scaleFactor, &_data, 1)
     }
     
+    func dot(v: Vector) throws -> Double {
+        guard v.length == length else {
+            throw VectorError.MismatchedLength(expected: length, found: v.length)
+        }
+        
+        return cblas_ddot(Int32(length), data, 1, v.data, 1)
+    }
+    
     class func hadamardProduct(v1: Vector, v2: Vector) throws -> Vector {
         guard v2.length == v1.length else {
             throw VectorError.MismatchedLength(expected: v1.length, found: v2.length)
