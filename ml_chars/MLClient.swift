@@ -43,24 +43,23 @@ class MLClient {
         return try! network.train(trainingData, testData: testData, learningRate: learningRate, momentum: momentum, epochLimit: epochLimit)
     }
     
-    /// Scales training data to have 0 mean and unit variance for each feature.
+    /// Wrapper function to scale both training and test data
     func scaleData() {
-        guard trainingData.count > 0 else {
-            return
+        if (trainingData.count > 0) {
+            scaleData(trainingData)
         }
         
-        let trainingDataStats = calculateStats(trainingData.map{ $0.attributeVector })
-        for l in trainingData {
-            let meanDiffs = zip(l.attributeVector, trainingDataStats.means).map{ $0.0 - $0.1 }
-            l.attributeVector = zip(meanDiffs, trainingDataStats.standardDeviations).map{ $0.0 / $0.1 }
+        if (testData.count > 0) {
+            scaleData(testData)
         }
-        
-        // Should probably DRY this up, but I did the training data first and then realized I forgot this so it's an
-        // interim fix.
-        let testDataStats = calculateStats(testData.map{ $0.attributeVector })
-        for l in testData {
-            let meanDiffs = zip(l.attributeVector, testDataStats.means).map{ $0.0 - $0.1 }
-            l.attributeVector = zip(meanDiffs, testDataStats.standardDeviations).map{ $0.0 / $0.1 }
+    }
+    
+    /// Scales `Letter` attribute vectors to have 0 mean and unit variance for each feature.
+    private func scaleData(data: [Letter]) {
+        let stats = calculateStats(data.map{ $0.attributeVector })
+        for l in data {
+            let meanDiffs = zip(l.attributeVector, stats.means).map{ $0.0 - $0.1 }
+            l.attributeVector = zip(meanDiffs, stats.standardDeviations).map{ $0.0 / $0.1 }
         }
     }
     
