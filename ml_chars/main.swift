@@ -15,10 +15,17 @@ let testDataPath = "/Users/rlb/Documents/School (Current)/CS 545 Machine Learnin
 let outputDirectory = "/Users/rlb/Documents/School (Current)/CS 545 Machine Learning/Multilayer Character Recognition"
 
 let client = MLClient()
+
+print("Loading data...")
 try! client.loadTrainingData(trainingDataPath)
 try! client.loadTestData(testDataPath)
-client.scaleTrainingData()
+print("Done.")
 
-client.testWithParameters(4, learningRate: 0.3, momentum: 0.3, epochLimit: 50).writeToCSV("\(outputDirectory)/exp1.csv")
+print("Scaling data...")
+client.scaleData()
+print("Done.")
+
+print("Running experiment 1...")
+client.testWithParameters(4, learningRate: 0.3, momentum: 0.3, epochLimit: 100).writeToCSV("\(outputDirectory)/exp1.csv")
 
 print("ayy")

@@ -44,7 +44,7 @@ class MLClient {
     }
     
     /// Scales training data to have 0 mean and unit variance for each feature.
-    func scaleTrainingData() {
+    func scaleData() {
         guard trainingData.count > 0 else {
             return
         }
@@ -53,6 +53,14 @@ class MLClient {
         for l in trainingData {
             let meanDiffs = zip(l.attributeVector, trainingDataStats.means).map{ $0.0 - $0.1 }
             l.attributeVector = zip(meanDiffs, trainingDataStats.standardDeviations).map{ $0.0 / $0.1 }
+        }
+        
+        // Should probably DRY this up, but I did the training data first and then realized I forgot this so it's an
+        // interim fix.
+        let testDataStats = calculateStats(testData.map{ $0.attributeVector })
+        for l in testData {
+            let meanDiffs = zip(l.attributeVector, testDataStats.means).map{ $0.0 - $0.1 }
+            l.attributeVector = zip(meanDiffs, testDataStats.standardDeviations).map{ $0.0 / $0.1 }
         }
     }
     
