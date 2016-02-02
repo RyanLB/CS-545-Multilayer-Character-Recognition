@@ -72,6 +72,7 @@ class SigmoidLayer {
         return result
     }
     
+    /// Weights the errors in this layer for use in the previous layer's training.
     func weightedErrors(errors: Vector) throws -> WeightedErrors {
         let weightErrors = try weights.transpose().vectorProduct(errors)
         let biasErrors = try Vector.hadamardProduct(biases, v2: errors)
@@ -79,6 +80,17 @@ class SigmoidLayer {
         return WeightedErrors(weightErrors: weightErrors, biasErrors: biasErrors)
     }
     
+    /**
+     Updates the weights in this layer using back-propagation.
+     
+     - Param learningRate: The rate at which we modify the weights in this layer.
+     - Param inputs: The input activations passed to this layer from the previous one.
+     - Param errors: The errors in this layer.
+     - Param momentum: The rate at which we alter weights in this iteration based on changes from the last.
+     - Param previousDeltas: The weight updates from the last iteration of training.
+     
+     - Returns: The `Deltas` object representing the changes made during this iteration.
+     */
     func train(learningRate: Double, inputs: Vector, errors: Vector, momentum: Double, previousDeltas: Deltas?) throws -> Deltas {
         let weightDeltas = try Matrix(rowVectors: errors.data.map{ Vector.scaled(inputs, scaleFactor: learningRate * $0) })
         
@@ -93,10 +105,5 @@ class SigmoidLayer {
         try biases.add(biasDeltas, scale: nil)
         
         return Deltas(weightDeltas: weightDeltas, biasDeltas: biasDeltas)
-    }
-    
-    private class func sigmoid(input: Double) -> Double {
-        let res = 1.0 / (1.0 + pow(M_E, -input))
-        return res
     }
 }

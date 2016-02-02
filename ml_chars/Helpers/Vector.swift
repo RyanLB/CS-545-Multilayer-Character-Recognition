@@ -49,6 +49,7 @@ class Vector {
         _data = _data.map{ 1 / (1 + pow(M_E, -$0)) }
     }
     
+    /// Element-wise vector addition with optional scale.
     func add(v2: Vector, scale: Double?) throws {
         guard v2.length == length else {
             throw VectorError.MismatchedLength(expected: length, found: v2.length)
@@ -56,10 +57,12 @@ class Vector {
         cblas_daxpy(Int32(length), scale != nil ? scale! : 1.0, v2.data, 1, &_data, 1)
     }
     
+    /// Scale this vector by a constant.
     func scale(scaleFactor: Double) {
         cblas_dscal(Int32(length), scaleFactor, &_data, 1)
     }
     
+    /// Calculate the dot product of this `Vector` and the one provided.
     func dot(v: Vector) throws -> Double {
         guard v.length == length else {
             throw VectorError.MismatchedLength(expected: length, found: v.length)
@@ -68,6 +71,7 @@ class Vector {
         return cblas_ddot(Int32(length), data, 1, v.data, 1)
     }
     
+    /// Element-wise multiplication of two `Vector`s.
     class func hadamardProduct(v1: Vector, v2: Vector) throws -> Vector {
         guard v2.length == v1.length else {
             throw VectorError.MismatchedLength(expected: v1.length, found: v2.length)
@@ -76,6 +80,7 @@ class Vector {
         return Vector(data: zip(v1.data, v2.data).map{ $0.0 * $0.1 } )
     }
     
+    /// Calculates the elementwise sum of v1 and v2.
     class func add(v1: Vector, scale: Double?, v2: Vector) throws -> Vector{
         guard v1.length == v2.length else {
             throw VectorError.MismatchedLength(expected: v1.length, found: v2.length)
@@ -87,6 +92,7 @@ class Vector {
         return newVector
     }
     
+    /// Create a `Vector` of small random numbers between -0.25 and 0.25
     class func randomVector(length: Int) -> Vector {
         assert(length >= 0, "Length cannot be negative")
         var randomData = [Double]()
@@ -97,6 +103,7 @@ class Vector {
         return Vector(data: randomData)
     }
     
+    /// Returns a copy of this `Vector` scaled by a constant.
     class func scaled(v: Vector, scaleFactor: Double) -> Vector {
         let newVec = Vector(data: v.data)
         newVec.scale(scaleFactor)

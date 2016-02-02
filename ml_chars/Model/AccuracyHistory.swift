@@ -20,10 +20,12 @@ class AccuracyHistory {
     
     var history = [AccuracyPair]()
     
+    /// Appends an entry to this history.
     func add(p: AccuracyPair) {
         history.append(p)
     }
     
+    /// Writes this history to a file at the given location.
     func writeToCSV(filename: String) {
         NSFileManager.defaultManager().createFileAtPath(filename, contents: nil, attributes: nil)
         let fh = NSFileHandle(forWritingAtPath: filename)

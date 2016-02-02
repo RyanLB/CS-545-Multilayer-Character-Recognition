@@ -62,7 +62,21 @@ class NeuralNetwork {
         return (hiddenActivations: hiddenActivations, outputActivations: outputActivations, guess: guess)
     }
     
+    /**
+     Trains this network on a given training set.
+     
+     - Param trainingData: A list of `Letter`s on which to train.
+     - Param testData: The test set. Accuracy is calculated over this set, but it is not used in training.
+     - Param learningRate: The learning rate at which we modify weights.
+     - Param momentum: The rate at which we update weights based on past updates.
+     - Param epochLimit: The number of epochs for which to train this network.
+     
+     - Returns: The history of training and test accuracies over the course of training.
+     */
     func train(trainingData: [Letter], testData: [Letter], learningRate: Double, momentum: Double, epochLimit: Int) throws -> AccuracyHistory {
+        // There's definitely a cleaner way to structure this, but it was originally written with the assumption that
+        // we would stop training when accuracy stopped increasing, as we did in our Perceptron assignment.
+        
         let history = AccuracyHistory()
         var trainingAccuracy = try accuracy(trainingData)
         history.add(AccuracyHistory.AccuracyPair(trainingAccuracy: trainingAccuracy, testAccuracy: try accuracy(testData)))
@@ -89,10 +103,12 @@ class NeuralNetwork {
         return history
     }
     
+    /// Calculates accuracy (correctly guessed instances / total) over the given dataset.
     private func accuracy(dataset: [Letter]) throws -> Double {
         return try Double(dataset.countWhere{ try self.test($0) == $0.knownValue }) / Double(dataset.count)
     }
     
+    /// Creates and returns a new `NeuralNetwork` with the weights that result from a single epoch.
     private func epochResult(trainingData: [Letter], learningRate: Double, momentum: Double) throws -> NeuralNetwork {
         let newNetwork = NeuralNetwork(original: self)
         
@@ -130,6 +146,7 @@ class NeuralNetwork {
         return newNetwork
     }
     
+    /// Takes 26 activations from the output layer and returns the Character with the highest value.
     private func guessFromActivations(activations: [Double]) -> Character {
         let winners = activations.indicesWhere{ $0 == activations.maxElement() }
         let winnerIndex = Int(arc4random_uniform(UInt32(winners.count)))
@@ -137,11 +154,13 @@ class NeuralNetwork {
         return guess
     }
     
+    /// Takes an index between 0 and 25 and returns a character between 'A' and 'Z'
     private class func characterFromAZIndex(index: Int) -> Character {
-        assert(index >= 0 && index <= 26, "Index must be between 0 and 26")
+        assert(index >= 0 && index < 26, "Index must be between 0 and 26")
         return Character(UnicodeScalar(index + 65))
     }
     
+    /// Takes a character, presumably between 'A' and 'Z', and returns an ordinal from 0-25.
     private class func AZIndexFromCharacter(c: Character) -> Int {
         let s = String(c).unicodeScalars
         let val = Int(s[s.startIndex].value)

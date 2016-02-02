@@ -125,12 +125,14 @@ class Matrix {
         return try! Matrix(data: newData)
     }
     
+    /// Scale the entries in this matrix by some constant.
     func scale(scaleFactor: Double) {
         for v in _dataArray {
             v.scale(scaleFactor)
         }
     }
     
+    /// Return a new matrix with this matrix's elements scaled by a constant.
     class func scaled(m: Matrix, scaleFactor: Double) -> Matrix {
         let newMat = try! Matrix(data: m._dataArray.map{ $0.data })
         newMat.scale(scaleFactor)
