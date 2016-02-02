@@ -31,13 +31,10 @@ let epochLimit = 100
 
 print("Running experiment 1...")
 client.testWithParameters(4, learningRate: 0.3, momentum: 0.3, epochLimit: epochLimit).writeToCSV("\(outputDirectory)/exp1.csv")
-
-/*
 print("Done. Running experiment 2a...")
 client.testWithParameters(4, learningRate: 0.05, momentum: 0.3, epochLimit: epochLimit).writeToCSV("\(outputDirectory)/exp2a.csv")
 print("Done. Running experiment 2b...")
 client.testWithParameters(4, learningRate: 0.6, momentum: 0.3, epochLimit: epochLimit).writeToCSV("\(outputDirectory)/exp2b.csv")
-
 print("Done. Running experiment 3a...")
 client.testWithParameters(4, learningRate: 0.3, momentum: 0.05, epochLimit: epochLimit).writeToCSV("\(outputDirectory)/exp3a.csv")
 print("Done. Running experiment 3b...")
@@ -46,5 +43,5 @@ print("Done. Running experiment 4a...")
 client.testWithParameters(2, learningRate: 0.3, momentum: 0.3, epochLimit: epochLimit).writeToCSV("\(outputDirectory)/exp4a.csv")
 print("Done. Running experiment 4b...")
 client.testWithParameters(8, learningRate: 0.3, momentum: 0.3, epochLimit: epochLimit).writeToCSV("\(outputDirectory)/exp4b.csv")
-*/
+
 print("Done.")
