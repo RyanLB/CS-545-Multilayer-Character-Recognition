@@ -45,18 +45,20 @@ class MLClient {
     
     /// Wrapper function to scale both training and test data
     func scaleData() {
-        if (trainingData.count > 0) {
-            scaleData(trainingData)
+        guard trainingData.count > 0 else {
+            return
         }
         
+        let stats = calculateStats(trainingData.map{ $0.attributeVector })
+        scaleData(trainingData, stats: stats)
+        
         if (testData.count > 0) {
-            scaleData(testData)
+            scaleData(testData, stats: stats)
         }
     }
     
     /// Scales `Letter` attribute vectors to have 0 mean and unit variance for each feature.
-    private func scaleData(data: [Letter]) {
-        let stats = calculateStats(data.map{ $0.attributeVector })
+    private func scaleData(data: [Letter], stats: (means: [Double], standardDeviations: [Double])) {
         for l in data {
             let meanDiffs = zip(l.attributeVector, stats.means).map{ $0.0 - $0.1 }
             l.attributeVector = zip(meanDiffs, stats.standardDeviations).map{ $0.0 / $0.1 }
