@@ -14,7 +14,6 @@
 		74A101DD1C54A7B10030CADF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101DC1C54A7B10030CADF /* main.swift */; };
 		74A101EC1C54AA5D0030CADF /* NSArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101EB1C54AA5D0030CADF /* NSArrayExtension.swift */; };
 		74A101EE1C54AA600030CADF /* NSFileHandleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101ED1C54AA600030CADF /* NSFileHandleExtension.swift */; };
-		74A101F11C54AA8F0030CADF /* ConfusionMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101EF1C54AA8F0030CADF /* ConfusionMatrix.swift */; };
 		74A101F21C54AA8F0030CADF /* Letter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101F01C54AA8F0030CADF /* Letter.swift */; };
 		74A101F61C54AB3F0030CADF /* SigmoidLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A101F51C54AB3F0030CADF /* SigmoidLayer.swift */; };
 		74C5265B1C59DD6A0090E50E /* NeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5265A1C59DD6A0090E50E /* NeuralNetwork.swift */; };
@@ -43,7 +42,6 @@
 		74A101DC1C54A7B10030CADF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		74A101EB1C54AA5D0030CADF /* NSArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSArrayExtension.swift; path = Extensions/NSArrayExtension.swift; sourceTree = "<group>"; };
 		74A101ED1C54AA600030CADF /* NSFileHandleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSFileHandleExtension.swift; path = Extensions/NSFileHandleExtension.swift; sourceTree = "<group>"; };
-		74A101EF1C54AA8F0030CADF /* ConfusionMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfusionMatrix.swift; path = Model/ConfusionMatrix.swift; sourceTree = "<group>"; };
 		74A101F01C54AA8F0030CADF /* Letter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Letter.swift; path = Model/Letter.swift; sourceTree = "<group>"; };
 		74A101F51C54AB3F0030CADF /* SigmoidLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SigmoidLayer.swift; path = Model/SigmoidLayer.swift; sourceTree = "<group>"; };
 		74C5265A1C59DD6A0090E50E /* NeuralNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NeuralNetwork.swift; path = Model/NeuralNetwork.swift; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 			children = (
 				74C5265A1C59DD6A0090E50E /* NeuralNetwork.swift */,
 				74A101F51C54AB3F0030CADF /* SigmoidLayer.swift */,
-				74A101EF1C54AA8F0030CADF /* ConfusionMatrix.swift */,
 				74A101F01C54AA8F0030CADF /* Letter.swift */,
 				743AE8441C55A8E6007F4B0D /* OutputLayer.swift */,
 				743AE8461C55AC37007F4B0D /* HiddenLayer.swift */,
@@ -181,7 +178,6 @@
 			files = (
 				74A101EE1C54AA600030CADF /* NSFileHandleExtension.swift in Sources */,
 				74C5265D1C59DE8F0090E50E /* MLClient.swift in Sources */,
-				74A101F11C54AA8F0030CADF /* ConfusionMatrix.swift in Sources */,
 				744581001C56DAA200906A34 /* Vector.swift in Sources */,
 				744580FE1C56D39700906A34 /* Matrix.swift in Sources */,
 				74A101F61C54AB3F0030CADF /* SigmoidLayer.swift in Sources */,
